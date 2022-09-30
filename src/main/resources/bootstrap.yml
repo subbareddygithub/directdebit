@@ -1,0 +1,70 @@
+management: 
+  endpoint: 
+    metrics: 
+      enabled: true
+    prometheus: 
+      enabled: true
+  endpoints: 
+    web: 
+      exposure: 
+        include: "*"
+  metrics: 
+    export: 
+      prometheus: 
+        enabled: true
+spring: 
+  application: 
+    name: internaldirectdebit
+  cloud: 
+    config: 
+      failFast: false
+      retry: 
+        maxAttempts: 20
+      uri: ${CONFIG_SERVER_URI}
+  profiles: 
+    active: ${PROFILE:dev}
+  sleuth: 
+    sampler: 
+      percentage: 1
+  api: 
+    corporate current account: 
+      context-path: /CorporateCurrentAccount/Initiate
+      hosturl: /test
+      jolt-filename: Corporate Current Account476963-jolt.json
+    current account: 
+      context-path: /CurrentAccount/Initiate
+      hosturl: /test
+      jolt-filename: Current Account664938-jolt.json
+    customer evaluate: 
+      context-path: /CustomerAgreement/Evaluate
+      hosturl: /test
+      jolt-filename: Customer Evaluate413798-jolt.json
+    direct debit: 
+      context-path: /DirectDebit/Initiate
+      hosturl: /test
+      jolt-filename: Direct Debit357453-jolt.json
+    internal bank account: 
+      context-path: /InternalBankAccount/{internalbankaccountId}/Capture
+      hosturl: /test
+      jolt-filename: Internal Bank Account872900-jolt.json
+    payment execution: 
+      context-path: /PaymentExecution/Initiate
+      hosturl: /test
+      jolt-filename: Payment Execution440128-jolt.json
+    payment initiation: 
+      context-path: /PaymentInitiation/Initiate
+      hosturl: /test
+      jolt-filename: Payment Initiation710868-jolt.json
+    payment order: 
+      context-path: /PaymentOrder/Initiate
+      hosturl: /test
+      jolt-filename: Payment Order696290-jolt.json
+    position keeping: 
+      context-path: /PositionKeeping/Initiate
+      hosturl: /test
+      jolt-filename: Position Keeping283925-jolt.json
+  datasource: 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: ${mysql_pwd}
+    url: jdbc:mysql://${mysql_url}:3306/camunda
+    username: ${mysql_user}

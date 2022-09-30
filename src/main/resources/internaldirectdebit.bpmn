@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.2.4">
+    <bpmn:process id="internaldirectdebit" name="internaldirectdebit" isExecutable="true">
+
+        <bpmn:startEvent id="id_544fd0c2-17b8-41f9-bad3-7d5bdc99fdcd">
+            <bpmn:outgoing>id_aa636724-8e83-4dcb-814e-5c52c4e8a6c5</bpmn:outgoing>
+        </bpmn:startEvent>
+
+        <bpmn:endEvent id="id_829c1cc1-f394-4b99-99f3-562190b45a70">
+            <bpmn:incoming>id_518cd989-4a4b-4c9b-86d8-b6d4a87d5f40</bpmn:incoming>
+        </bpmn:endEvent>
+
+        <bpmn:serviceTask id="id_24c7eb4f-831c-493d-b350-5e97a1ea500b" name="Payment Initiation" camunda:asyncBefore="true" camunda:class="com.ibm.dip.adapters.test">
+            <bpmn:incoming>id_aa636724-8e83-4dcb-814e-5c52c4e8a6c5</bpmn:incoming>
+            <bpmn:outgoing>id_226bc04c-b1ca-4481-a114-a78eb0f5bac8</bpmn:outgoing>
+        </bpmn:serviceTask>
+        <bpmn:serviceTask id="id_87ed8379-82ee-46b4-a1d5-3219d272d917" name="Customer Evaluate" camunda:asyncBefore="true" camunda:class="com.ibm.dip.adapters.test">
+            <bpmn:incoming>id_226bc04c-b1ca-4481-a114-a78eb0f5bac8</bpmn:incoming>
+            <bpmn:outgoing>id_162c2999-8b67-4136-a966-f31d6b7f7a1a</bpmn:outgoing>
+        </bpmn:serviceTask>
+        <bpmn:serviceTask id="id_7e15ccff-f707-48ab-8101-9f1990006854" name="Direct Debit" camunda:asyncBefore="true" camunda:class="com.ibm.dip.adapters.test">
+            <bpmn:incoming>id_162c2999-8b67-4136-a966-f31d6b7f7a1a</bpmn:incoming>
+        </bpmn:serviceTask>
+        <bpmn:serviceTask id="id_25e23589-e840-4faa-80ed-83db3b3d2f2e" name="Payment Execution" camunda:asyncBefore="true" camunda:class="com.ibm.dip.adapters.test">
+            <bpmn:incoming>id_1835aa62-0b3f-4ae0-af05-7e8b78891b8c</bpmn:incoming>
+            <bpmn:outgoing>id_96cd2f6f-e67a-4206-be18-70451a8366e2</bpmn:outgoing>
+        </bpmn:serviceTask>
+        <bpmn:serviceTask id="id_aa856d5a-c2b0-4696-b17f-3843c25c5166" name="Payment Order" camunda:asyncBefore="true" camunda:class="com.ibm.dip.adapters.test">
+            <bpmn:outgoing>id_1835aa62-0b3f-4ae0-af05-7e8b78891b8c</bpmn:outgoing>
+        </bpmn:serviceTask>
+        <bpmn:serviceTask id="id_b8aa6924-f2bb-4c87-a5c3-bf4a2ba91d41" name="Position Keeping" camunda:asyncBefore="true" camunda:class="com.ibm.dip.adapters.test">
+            <bpmn:incoming>id_96cd2f6f-e67a-4206-be18-70451a8366e2</bpmn:incoming>
+            <bpmn:outgoing>id_aec1a987-f5e4-4f16-98e6-bc529eccf23f</bpmn:outgoing>
+        </bpmn:serviceTask>
+        <bpmn:serviceTask id="id_8cba1a93-b7de-4063-b565-1b19912b2678" name="Current Account" camunda:asyncBefore="true" camunda:class="com.ibm.dip.adapters.test">
+            <bpmn:incoming>id_aec1a987-f5e4-4f16-98e6-bc529eccf23f</bpmn:incoming>
+            <bpmn:outgoing>id_a0f76efb-4cba-45f1-aa10-9b7ffc8d30a7</bpmn:outgoing>
+        </bpmn:serviceTask>
+        <bpmn:serviceTask id="id_6fc2e412-7dca-45ed-b950-99b588b469e3" name="Internal Bank Account" camunda:asyncBefore="true" camunda:class="com.ibm.dip.adapters.test">
+            <bpmn:incoming>id_a0f76efb-4cba-45f1-aa10-9b7ffc8d30a7</bpmn:incoming>
+            <bpmn:outgoing>id_d9465962-49e5-49d0-a239-ea3e5e463ad1</bpmn:outgoing>
+        </bpmn:serviceTask>
+        <bpmn:serviceTask id="id_d76ef6a2-b33f-47f7-bf03-e88ca61db541" name="Corporate Current Account" camunda:asyncBefore="true" camunda:class="com.ibm.dip.adapters.test">
+            <bpmn:incoming>id_d9465962-49e5-49d0-a239-ea3e5e463ad1</bpmn:incoming>
+            <bpmn:outgoing>id_518cd989-4a4b-4c9b-86d8-b6d4a87d5f40</bpmn:outgoing>
+        </bpmn:serviceTask>
+
+
+
+
+
+
+        <bpmn:sequenceFlow id="id_aa636724-8e83-4dcb-814e-5c52c4e8a6c5" sourceRef="id_544fd0c2-17b8-41f9-bad3-7d5bdc99fdcd" targetRef="id_24c7eb4f-831c-493d-b350-5e97a1ea500b"/>
+        <bpmn:sequenceFlow id="id_226bc04c-b1ca-4481-a114-a78eb0f5bac8" sourceRef="id_24c7eb4f-831c-493d-b350-5e97a1ea500b" targetRef="id_87ed8379-82ee-46b4-a1d5-3219d272d917"/>
+        <bpmn:sequenceFlow id="id_162c2999-8b67-4136-a966-f31d6b7f7a1a" sourceRef="id_87ed8379-82ee-46b4-a1d5-3219d272d917" targetRef="id_7e15ccff-f707-48ab-8101-9f1990006854"/>
+        <bpmn:sequenceFlow id="id_1835aa62-0b3f-4ae0-af05-7e8b78891b8c" sourceRef="id_aa856d5a-c2b0-4696-b17f-3843c25c5166" targetRef="id_25e23589-e840-4faa-80ed-83db3b3d2f2e"/>
+        <bpmn:sequenceFlow id="id_aec1a987-f5e4-4f16-98e6-bc529eccf23f" sourceRef="id_b8aa6924-f2bb-4c87-a5c3-bf4a2ba91d41" targetRef="id_8cba1a93-b7de-4063-b565-1b19912b2678"/>
+        <bpmn:sequenceFlow id="id_a0f76efb-4cba-45f1-aa10-9b7ffc8d30a7" sourceRef="id_8cba1a93-b7de-4063-b565-1b19912b2678" targetRef="id_6fc2e412-7dca-45ed-b950-99b588b469e3"/>
+        <bpmn:sequenceFlow id="id_d9465962-49e5-49d0-a239-ea3e5e463ad1" sourceRef="id_6fc2e412-7dca-45ed-b950-99b588b469e3" targetRef="id_d76ef6a2-b33f-47f7-bf03-e88ca61db541"/>
+        <bpmn:sequenceFlow id="id_96cd2f6f-e67a-4206-be18-70451a8366e2" sourceRef="id_25e23589-e840-4faa-80ed-83db3b3d2f2e" targetRef="id_b8aa6924-f2bb-4c87-a5c3-bf4a2ba91d41"/>
+        <bpmn:sequenceFlow id="id_518cd989-4a4b-4c9b-86d8-b6d4a87d5f40" sourceRef="id_d76ef6a2-b33f-47f7-bf03-e88ca61db541" targetRef="id_829c1cc1-f394-4b99-99f3-562190b45a70"/>
+
+        <bpmn:subProcess id="SubProcess_10gul9f" triggeredByEvent="true">
+            <bpmn:startEvent id="StartEvent_1vroe4j">
+                <bpmn:outgoing>SequenceFlow_0v8nfh9</bpmn:outgoing>
+                <bpmn:errorEventDefinition id="ErrorEventDefinition_0s24ktu" errorRef="Error_1dml388" />
+            </bpmn:startEvent>
+            <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_0wrqa3o">
+                <bpmn:incoming>SequenceFlow_0v8nfh9</bpmn:incoming>
+                <bpmn:outgoing>SequenceFlow_1vuwcqy</bpmn:outgoing>
+                <bpmn:compensateEventDefinition id="CompensateEventDefinition_0de6hep" />
+            </bpmn:intermediateThrowEvent>
+            <bpmn:endEvent id="EndEvent_0unn4fa">
+                <bpmn:incoming>SequenceFlow_1vuwcqy</bpmn:incoming>
+            </bpmn:endEvent>
+            <bpmn:sequenceFlow id="SequenceFlow_1vuwcqy" sourceRef="IntermediateThrowEvent_0wrqa3o" targetRef="EndEvent_0unn4fa" />
+            <bpmn:sequenceFlow id="SequenceFlow_0v8nfh9" sourceRef="StartEvent_1vroe4j" targetRef="IntermediateThrowEvent_0wrqa3o" />
+        </bpmn:subProcess>
+
+
+    </bpmn:process>
+    <bpmn:error id="Error_1dml388" errorCode="java.lang.Throwable" />
+
+    <bpmndi:BPMNDiagram id="BPMDiagram_1">
+        <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="internaldirectdebit">
+            <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="id_544fd0c2-17b8-41f9-bad3-7d5bdc99fdcd">
+                <dc:Bounds x="6" y="154" width="36" height="36" />
+            </bpmndi:BPMNShape>
+
+            <bpmndi:BPMNShape id="ServiceTask_id_24c7eb4f-831c-493d-b350-5e97a1ea500b" bpmnElement="id_24c7eb4f-831c-493d-b350-5e97a1ea500b">
+                <dc:Bounds x="182" y="-6" width="100" height="80" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ServiceTask_id_87ed8379-82ee-46b4-a1d5-3219d272d917" bpmnElement="id_87ed8379-82ee-46b4-a1d5-3219d272d917">
+                <dc:Bounds x="405" y="6" width="100" height="80" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ServiceTask_id_7e15ccff-f707-48ab-8101-9f1990006854" bpmnElement="id_7e15ccff-f707-48ab-8101-9f1990006854">
+                <dc:Bounds x="695" y="-7" width="100" height="80" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ServiceTask_id_25e23589-e840-4faa-80ed-83db3b3d2f2e" bpmnElement="id_25e23589-e840-4faa-80ed-83db3b3d2f2e">
+                <dc:Bounds x="267" y="195" width="100" height="80" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ServiceTask_id_aa856d5a-c2b0-4696-b17f-3843c25c5166" bpmnElement="id_aa856d5a-c2b0-4696-b17f-3843c25c5166">
+                <dc:Bounds x="877" y="-9" width="100" height="80" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ServiceTask_id_b8aa6924-f2bb-4c87-a5c3-bf4a2ba91d41" bpmnElement="id_b8aa6924-f2bb-4c87-a5c3-bf4a2ba91d41">
+                <dc:Bounds x="540" y="188" width="100" height="80" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ServiceTask_id_8cba1a93-b7de-4063-b565-1b19912b2678" bpmnElement="id_8cba1a93-b7de-4063-b565-1b19912b2678">
+                <dc:Bounds x="755" y="180" width="100" height="80" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ServiceTask_id_6fc2e412-7dca-45ed-b950-99b588b469e3" bpmnElement="id_6fc2e412-7dca-45ed-b950-99b588b469e3">
+                <dc:Bounds x="958" y="152" width="100" height="80" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ServiceTask_id_d76ef6a2-b33f-47f7-bf03-e88ca61db541" bpmnElement="id_d76ef6a2-b33f-47f7-bf03-e88ca61db541">
+                <dc:Bounds x="314" y="357" width="100" height="80" />
+            </bpmndi:BPMNShape>
+
+
+
+
+
+            <bpmndi:BPMNShape id="EndEvent_0x6ir2l_di" bpmnElement="id_829c1cc1-f394-4b99-99f3-562190b45a70">
+                <dc:Bounds x="1016" y="343" width="36" height="36" />
+            </bpmndi:BPMNShape>
+
+            <bpmndi:BPMNEdge id="SequenceFlow_id_aa636724-8e83-4dcb-814e-5c52c4e8a6c5" bpmnElement="id_aa636724-8e83-4dcb-814e-5c52c4e8a6c5">
+                <di:waypoint x="6" y="154" />
+                <di:waypoint x="182" y="-6" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_id_226bc04c-b1ca-4481-a114-a78eb0f5bac8" bpmnElement="id_226bc04c-b1ca-4481-a114-a78eb0f5bac8">
+                <di:waypoint x="182" y="-6" />
+                <di:waypoint x="405" y="6" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_id_162c2999-8b67-4136-a966-f31d6b7f7a1a" bpmnElement="id_162c2999-8b67-4136-a966-f31d6b7f7a1a">
+                <di:waypoint x="405" y="6" />
+                <di:waypoint x="695" y="-7" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_id_1835aa62-0b3f-4ae0-af05-7e8b78891b8c" bpmnElement="id_1835aa62-0b3f-4ae0-af05-7e8b78891b8c">
+                <di:waypoint x="877" y="-9" />
+                <di:waypoint x="267" y="195" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_id_aec1a987-f5e4-4f16-98e6-bc529eccf23f" bpmnElement="id_aec1a987-f5e4-4f16-98e6-bc529eccf23f">
+                <di:waypoint x="540" y="188" />
+                <di:waypoint x="755" y="180" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_id_a0f76efb-4cba-45f1-aa10-9b7ffc8d30a7" bpmnElement="id_a0f76efb-4cba-45f1-aa10-9b7ffc8d30a7">
+                <di:waypoint x="755" y="180" />
+                <di:waypoint x="958" y="152" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_id_d9465962-49e5-49d0-a239-ea3e5e463ad1" bpmnElement="id_d9465962-49e5-49d0-a239-ea3e5e463ad1">
+                <di:waypoint x="958" y="152" />
+                <di:waypoint x="314" y="357" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_id_96cd2f6f-e67a-4206-be18-70451a8366e2" bpmnElement="id_96cd2f6f-e67a-4206-be18-70451a8366e2">
+                <di:waypoint x="267" y="195" />
+                <di:waypoint x="540" y="188" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_id_518cd989-4a4b-4c9b-86d8-b6d4a87d5f40" bpmnElement="id_518cd989-4a4b-4c9b-86d8-b6d4a87d5f40">
+                <di:waypoint x="314" y="357" />
+                <di:waypoint x="1016" y="343" />
+            </bpmndi:BPMNEdge>
+
+            <bpmndi:BPMNShape id="SubProcess_10gul9f_di" bpmnElement="SubProcess_10gul9f" isExpanded="true">
+                <dc:Bounds x="18" y="424" width="315" height="165" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="StartEvent_1vroe4j_di" bpmnElement="StartEvent_1vroe4j">
+                <dc:Bounds x="68" y="471" width="36" height="36" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="IntermediateThrowEvent_0wrqa3o_di" bpmnElement="IntermediateThrowEvent_0wrqa3o">
+                <dc:Bounds x="154" y="471" width="36" height="36" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="EndEvent_0unn4fa_di" bpmnElement="EndEvent_0unn4fa">
+                <dc:Bounds x="240" y="471" width="36" height="36" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="SequenceFlow_1vuwcqy_di" bpmnElement="SequenceFlow_1vuwcqy">
+                <di:waypoint x="190" y="489" />
+                <di:waypoint x="240" y="489" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_0v8nfh9_di" bpmnElement="SequenceFlow_0v8nfh9">
+                <di:waypoint x="104" y="489" />
+                <di:waypoint x="154" y="489" />
+            </bpmndi:BPMNEdge>
+
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+
+
+</bpmn:definitions>
